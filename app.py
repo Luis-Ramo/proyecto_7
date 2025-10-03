@@ -10,7 +10,7 @@ st.title("Análisis de Datos de Vehículos")
 
 
 # 1. Tabla de datos
-if st.checkbox("Mostrar tabla de datos"):
+if st.checkbox("Tabla de datos"):
     show_small = st.checkbox("Incluir tipos con menos de 1000 anuncios", value=True)
 
     if not show_small:
@@ -25,7 +25,7 @@ else:
     car_df_filtered = car_df.copy()  # Para los demás gráficos
 
 # 2. Histograma del kilometraje
-if st.checkbox("Mostrar histograma del kilometraje"):
+if st.checkbox("Histograma del kilometraje"):
     st.write("Histograma del kilometraje de los vehículos")
     fig_hist = px.histogram(
         car_df_filtered,
@@ -37,7 +37,7 @@ if st.checkbox("Mostrar histograma del kilometraje"):
     st.plotly_chart(fig_hist, use_container_width=True)
 
 # 3. Gráfico de dispersión: Precio vs Kilometraje
-if st.checkbox("Mostrar gráfico de dispersión Precio vs Kilometraje"):
+if st.checkbox("Gráfico de dispersión Precio vs Kilometraje"):
     st.write("Gráfico de dispersión de Precio vs Kilometraje por tipo de vehículo")
     fig_scatter = px.scatter(
         car_df_filtered,
@@ -51,7 +51,7 @@ if st.checkbox("Mostrar gráfico de dispersión Precio vs Kilometraje"):
 
 
 # 4. Tipos de vehículos por marca
-if st.checkbox("Mostrar tipos de vehículos por marca"):
+if st.checkbox("Tipos de vehículos por marca"):
     car_df_filtered['marca'] = car_df_filtered['model'].str.split().str[0]
     counts = car_df_filtered['marca'].value_counts()
     valid_marcas = counts[counts >= 50].index
@@ -68,7 +68,7 @@ if st.checkbox("Mostrar tipos de vehículos por marca"):
     st.plotly_chart(fig_marcas, use_container_width=True)
 
 # 5. Histograma: Condición vs Año del modelo
-if st.checkbox("Mostrar distribución de condición por año del modelo"):
+if st.checkbox("Distribución de condición por año del modelo"):
     st.write("Histograma que muestra la distribución de la condición de los vehículos por año del modelo")
     df_condition = car_df_filtered.dropna(subset=['model_year', 'condition'])
     fig_condition = px.histogram(
